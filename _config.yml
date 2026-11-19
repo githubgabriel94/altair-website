@@ -1,0 +1,5 @@
+# GitHub Pages (Jekyll) settings. The site is plain HTML; this only keeps
+# repository-only files from being published.
+exclude:
+  - README.md
+  - _templates
