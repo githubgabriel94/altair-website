@@ -315,7 +315,7 @@ h1, h2, h3 {
 .contact-card .label { font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-soft); margin: 0 0 0.4rem; }
 .email {
   font-family: var(--mono);
-  font-size: clamp(1.05rem, 3.6vw, 1.35rem);
+  font-size: clamp(0.9rem, 4vw, 1.35rem);
   user-select: all;
   -webkit-user-select: all;
   overflow-wrap: anywhere;
