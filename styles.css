@@ -285,6 +285,65 @@ h1, h2, h3 {
 .facts dt { font-family: var(--mono); font-size: 0.8rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-soft); padding-top: 0.15rem; }
 .facts dd { margin: 0; overflow-wrap: anywhere; }
 
+/* ---------- Tazza Giusta card ----------
+   The app keeps its own look in both site themes: roasted brown, crema and
+   the green-bean accent from its icon. */
+
+.apps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+.app-card.tazza {
+  --tg-bg: #17120F;
+  --tg-surface: #241C16;
+  --tg-line: #3A2E26;
+  --tg-ink: #F1E8DD;
+  --tg-muted: #A6978A;
+  --tg-accent: #93B97C;
+  --tg-crema: #D4A574;
+
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 2rem;
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+  color: var(--tg-ink);
+  background:
+    radial-gradient(60% 90% at 88% 50%, #3A2C22 0%, transparent 70%),
+    linear-gradient(180deg, var(--tg-surface), var(--tg-bg));
+  border-color: var(--tg-line);
+  overflow: hidden;
+}
+.app-card.tazza .tazza-text { display: flex; flex-direction: column; gap: 0.75rem; min-width: 0; }
+.app-card.tazza .index { color: var(--tg-crema); }
+.app-card.tazza .pill.next { border-color: var(--tg-accent); color: var(--tg-accent); }
+.app-card.tazza h3 { font-size: clamp(2rem, 5vw, 2.8rem); margin: 0.25rem 0 0; color: var(--tg-ink); }
+.app-card.tazza h3 em { font-style: italic; color: var(--tg-crema); }
+.app-card.tazza .tagline { font-family: var(--serif); font-size: 1.15rem; color: var(--tg-ink); }
+.app-card.tazza p { color: var(--tg-muted); max-width: 34rem; }
+
+.tazza-features { display: flex; flex-wrap: wrap; gap: 0.5rem; list-style: none; margin: 0.25rem 0 0; padding: 0; }
+.tazza-features li {
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.3rem 0.75rem;
+  border-radius: 999px;
+  color: var(--tg-ink);
+  background: rgba(212, 165, 116, 0.12);
+  border: 1px solid rgba(212, 165, 116, 0.28);
+}
+.app-card.tazza .tazza-meta { font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.06em; color: var(--tg-muted); }
+
+.tazza-art img {
+  width: clamp(120px, 18vw, 168px);
+  height: auto;
+  border-radius: 22.37%;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(241, 232, 221, 0.08);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .tazza-art img { transition: transform 0.4s ease; }
+  .app-card.tazza:hover .tazza-art img { transform: rotate(-4deg) scale(1.03); }
+}
+
 /* ---------- Text pages (Support, Privacy) ---------- */
 
 .page-head {
@@ -355,6 +414,8 @@ h1, h2, h3 {
   .hero .wrap { grid-template-columns: 1fr; }
   .hero .sky { max-width: 22rem; margin-inline: auto; order: -1; }
   .apps { grid-template-columns: 1fr; }
+  .app-card.tazza { grid-template-columns: 1fr; gap: 1.25rem; }
+  .tazza-art { order: -1; }
   .facts { grid-template-columns: 1fr; gap: 1.5rem; }
 }
 
