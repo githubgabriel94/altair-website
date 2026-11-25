@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Shared Recipe — Tazza Giusta</title>
+  <meta name="description" content="An espresso recipe shared from Tazza Giusta.">
+  <!-- Each link carries its own recipe, so these pages shouldn't be indexed. -->
+  <meta name="robots" content="noindex">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#17120F">
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../styles.css">
+  <style>
+    /* Tazza Giusta's own colors, the same in both site themes (see .app-card.tazza). */
+    .tg-page {
+      --tg-bg: #17120F; --tg-surface: #241C16; --tg-line: #3A2E26; --tg-ink: #F1E8DD;
+      --tg-muted: #A6978A; --tg-accent: #93B97C; --tg-on-accent: #13200F; --tg-crema: #D4A574;
+      background: radial-gradient(80% 60% at 80% 0%, #3A2C22, var(--tg-bg) 70%);
+      color: var(--tg-ink);
+      padding-block: clamp(2.5rem, 7vw, 4.5rem);
+    }
+    .tg-page .wrap { max-width: 40rem; display: grid; gap: 1.5rem; }
+    .tg-head { display: flex; align-items: center; gap: 1rem; }
+    .tg-head img { width: 64px; height: 64px; border-radius: 22.37%; box-shadow: 0 10px 24px rgba(0,0,0,.45); flex: none; }
+    .tg-head .eyebrow { color: var(--tg-crema); margin: 0 0 .25rem; }
+    .tg-head p { margin: 0; color: var(--tg-muted); }
+    .tg-card { background: var(--tg-surface); border: 1px solid var(--tg-line); border-radius: 20px; padding: clamp(1.25rem, 4vw, 2rem); display: grid; gap: 1rem; }
+    .tg-card h1 { font-size: clamp(2rem, 6vw, 2.8rem); margin: 0; color: var(--tg-ink); overflow-wrap: anywhere; }
+    .tg-card .details { margin: 0; color: var(--tg-muted); }
+    .tg-numbers { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .75rem; margin: 0; }
+    .tg-numbers div { background: rgba(212,165,116,.08); border: 1px solid rgba(212,165,116,.2); border-radius: 14px; padding: .75rem; }
+    .tg-numbers dt { font-family: var(--mono); font-size: .7rem; letter-spacing: .1em; text-transform: uppercase; color: var(--tg-muted); }
+    .tg-numbers dd { margin: .15rem 0 0; font-family: var(--serif); font-size: clamp(1.3rem, 4vw, 1.7rem); font-weight: 600; font-variant-numeric: tabular-nums; }
+    .tg-numbers dd small { font-family: var(--sans); font-size: .8rem; font-weight: 500; color: var(--tg-muted); margin-left: .15rem; }
+    .tg-note { margin: 0; font-size: .95rem; color: var(--tg-muted); }
+    .tg-actions { display: grid; gap: .75rem; }
+    .tg-button { display: inline-flex; justify-content: center; padding: .9rem 1.4rem; border-radius: 999px; font-weight: 700; text-decoration: none; background: var(--tg-accent); color: var(--tg-on-accent); }
+    .tg-button:hover { filter: brightness(1.06); }
+    .tg-page a:not(.tg-button) { color: var(--tg-crema); }
+    .tg-page :focus-visible { outline-color: var(--tg-accent); }
+    @media (max-width: 520px) { .tg-numbers { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="../../index.html" aria-label="Altair Solutions Inc., home">
+        <svg viewBox="0 0 32 32" aria-hidden="true"><path fill="currentColor" d="M16 3.5 18.3 13.7 28.5 16 18.3 18.3 16 28.5 13.7 18.3 3.5 16 13.7 13.7Z"/><circle cx="5" cy="27" r="1.8" fill="currentColor" opacity=".7"/><circle cx="27" cy="5" r="1.8" fill="currentColor" opacity=".7"/></svg>
+        Altair Solutions
+      </a>
+      <nav class="nav" aria-label="Main">
+        <ul>
+          <li><a href="../../index.html#apps">Apps</a></li>
+          <li><a href="../../support/index.html">Support</a></li>
+          <li><a href="../../privacy/index.html">Privacy</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="tg-page">
+    <div class="wrap">
+      <div class="tg-head">
+        <img src="../../assets/tazza-giusta-icon.svg" alt="" width="64" height="64">
+        <div>
+          <p class="eyebrow">Tazza Giusta · Shared recipe</p>
+          <p>Someone shared an espresso recipe with you.</p>
+        </div>
+      </div>
+
+      <!-- Filled in from the link by the script below. Shown as is when the link has no recipe. -->
+      <section class="tg-card" id="recipe" aria-live="polite">
+        <h1 id="bean">This link has no recipe</h1>
+        <p class="details" id="details">Ask whoever sent it to share it again from Tazza Giusta.</p>
+        <dl class="tg-numbers" id="numbers" hidden>
+          <div><dt>Dose</dt><dd id="dose"></dd></div>
+          <div><dt>Yield</dt><dd id="yield"></dd></div>
+          <div><dt>Time</dt><dd id="time"></dd></div>
+          <div><dt>Ratio</dt><dd id="ratio"></dd></div>
+        </dl>
+        <p class="tg-note" id="grind" hidden></p>
+      </section>
+
+      <div class="tg-actions" id="actions" hidden>
+        <a class="tg-button" id="open" href="#">Open in Tazza Giusta</a>
+        <p class="tg-note">Tazza Giusta is a shot timer and dial-in coach for home espresso, coming to the App Store for iPhone. If you have it, the button adds this recipe to your beans.</p>
+      </div>
+
+      <p class="tg-note">The recipe lives inside the link itself. This page reads it in your browser; nothing is sent to us.</p>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>© Altair Solutions Inc.</p>
+      <ul>
+        <li><a href="../../support/index.html">Support</a></li>
+        <li><a href="../../privacy/index.html">Privacy</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <script>
+    // Reads the recipe from the link's fragment (#...), which browsers never
+    // send to a server. Same format as RecipeLink.swift in the app.
+    (function () {
+      var payload = location.hash.slice(1);
+      if (!payload || payload.length > 4000) return;
+
+      var recipe;
+      try {
+        var b64 = payload.replace(/-/g, "+").replace(/_/g, "/");
+        b64 += "===".slice((b64.length + 3) % 4);
+        var bytes = Uint8Array.from(atob(b64), function (c) { return c.charCodeAt(0); });
+        recipe = JSON.parse(new TextDecoder().decode(bytes));
+      } catch (e) { return; }
+
+      var num = function (v, lo, hi) { return typeof v === "number" && isFinite(v) && v >= lo && v <= hi; };
+      var text = function (v) { return typeof v === "string" ? v.replace(/[\u0000-\u001f]/g, " ").trim().slice(0, 80) : ""; };
+      if (!recipe || recipe.v > 1 || !num(recipe.d, 1, 40) || !num(recipe.y, 1, 150)) return;
+
+      var fmt = function (v) { return (Math.round(v * 10) / 10).toString(); };
+      var set = function (id, value, unit) {
+        var el = document.getElementById(id);
+        el.textContent = value;
+        if (unit) { var s = document.createElement("small"); s.textContent = unit; el.appendChild(s); }
+      };
+
+      var name = text(recipe.b) || "Shared recipe";
+      document.title = name + " — Tazza Giusta";
+      set("bean", name);
+      set("details", [text(recipe.r), text(recipe.o), text(recipe.p)].filter(Boolean).join(" · ") || "Espresso");
+      set("dose", fmt(recipe.d), "g");
+      set("yield", fmt(recipe.y), "g");
+      var low = num(recipe.tl, 5, 90) ? recipe.tl : 27, high = num(recipe.th, low, 120) ? recipe.th : 30;
+      set("time", fmt(low) + "–" + fmt(high), "s");
+      set("ratio", "1 : " + (recipe.y / recipe.d).toFixed(1));
+      document.getElementById("numbers").hidden = false;
+
+      if (num(recipe.g, 0, 1000)) {
+        var grinder = text(recipe.gn);
+        var grind = document.getElementById("grind");
+        grind.textContent = "Grind " + fmt(recipe.g) + (grinder ? " on a " + grinder : "") +
+          ". Grinders number their dials differently, so treat it as a starting point on another model.";
+        grind.hidden = false;
+      }
+
+      document.getElementById("open").href = "tazzagiusta://recipe#" + payload;
+      document.getElementById("actions").hidden = false;
+    })();
+  </script>
+</body>
+</html>
